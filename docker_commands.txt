@@ -1,0 +1,7 @@
+      docker run --name apache-proxy --volumes-from proxy-data -p 80:80 -d diouxx/apache-proxy
+  107  docker build -t wtsolid/node-web-app .
+  108  docker run --name myweb -p 8009:8080 -d wtsolid/node-web-app
+  117  docker cp /opt/proxy-conf/myself.conf apache-proxy:/opt/proxy-conf/
+  118  docker exec apache-proxy apache2ctl -k graceful
+  122  docker cp /opt/proxy-conf/myself.conf apache-proxy:/opt/web-host/
+  123  docker exec apache-proxy apache2ctl -k graceful
